@@ -1,0 +1,32 @@
+## 準備と立ち上げ
+以下の.envファイルを作成
+```
+MYSQL_ROOT_PASSWORD=fugafuga
+MYSQL_DATABASE=study
+MYSQL_USER=test
+MYSQL_PASSWORD=hogehoge
+```
+
+
+コンテナの立ち上げ
+```
+ // イメージの作成・コンテナの作成
+ docker compose up -d
+```
+
+## コンテナに入る〜MySQLへのログイン
+
+```
+ // コンテナに入る
+ docker compose exec db bash
+
+ bash> mysql -u test -p study
+ ```
+
+username / password / databaseNameは.envで指定したもの
+
+## SQLファイルの実行
+
+```
+SOURCE /data/tech_projin/techProjin.sql (SQLファイルは/dataにあればどこでも)
+```
