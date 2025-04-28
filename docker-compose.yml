@@ -1,0 +1,22 @@
+# docker-compose.yml
+version: '3.8' # Composeファイルのバージョンを指定
+
+services:
+  db:
+    image: mysql:8.0          # MySQLイメージを指定 (8.0以上)
+    container_name: training_db # コンテナ名を指定 (任意)
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}' # ルートユーザーのパスワード
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'                  # 作成するデータベース名
+      MYSQL_USER: '${MYSQL_USER}'                    # 作成するユーザー名
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'   # 作成するユーザーのパスワード
+      TZ: 'Asia/Tokyo'                               # タイムゾーン設定 (任意)
+    ports:
+      - "3306:3306"           # ホストの3306番ポートをコンテナの3306番ポートにマッピング
+    volumes:
+      - training_mysql_data:/var/lib/mysql
+      - ./data:/data
+
+volumes:
+  training_mysql_data:             # 名前付きボリュームの定義
+    driver: local         # ローカルドライバーを使用
